@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#fff0f5" />
+  <title>Something For You 💗</title>
+  <style>
+    :root { --pink:#d95d88; --deep:#8b3659; --pale:#fff0f5; --ink:#633c4c; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; display:grid; place-items:center; padding:24px; font-family: 'Segoe UI',Arial,sans-serif; background:radial-gradient(circle at 15% 20%,#ffe2ec,transparent 45%),linear-gradient(140deg,#fff8fb,#fbd5e4); color:var(--ink); overflow-x:hidden; }
+    .hearts {position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+    .heart {position:absolute;bottom:-30px;color:#e88bac;opacity:.35;animation:floatUp linear infinite}
+    @keyframes floatUp {to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+    main {position:relative;z-index:1;width:min(100%,570px);background:#ffffffd9;border:1px solid #fff;border-radius:28px;padding:clamp(28px,6vw,54px);box-shadow:0 22px 65px #b55c7c26;text-align:center;backdrop-filter:blur(8px)}
+    .icon {font-size:52px;display:block;margin-bottom:16px;animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse {50%{transform:scale(1.12)}}
+    h1 {font-family:Georgia,serif;font-size:clamp(29px,6vw,42px);line-height:1.2;color:var(--deep);margin:0 0 18px}
+    p {font-size:16px;line-height:1.85;margin:0 0 17px}
+    .step {display:none;animation:fade .45s ease both}
+    .step.active {display:block}
+    @keyframes fade {from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    .eyebrow {font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--pink);font-weight:700;margin-bottom:12px}
+    button {appearance:none;border:0;border-radius:999px;padding:14px 24px;margin:7px 5px 0;background:var(--pink);color:white;font-size:15px;font-weight:600;cursor:pointer;transition:transform .2s,background .2s;max-width:100%}
+    button:hover {transform:translateY(-2px);background:#c34c76}
+    button.secondary {background:#fbe3ec;color:var(--deep)}
+    button.secondary:hover {background:#f6cedd}
+    .small {font-size:13px;color:#987181;margin-top:20px}
+    .divider {height:1px;background:#f4d4e0;margin:22px 0}
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="hearts" aria-hidden="true" id="hearts"></div>
+  <main>
+    <section class="step active" id="step1">
+      <span class="icon">💌</span><div class="eyebrow">A little something</div>
+      <h1>hey sayang, i made this for you.</h1>
+      <p>there are a lots i want to say to you and i  hope you'll take a moment to read them.</p>
+      <button onclick="showStep(2)">Open my letter ♡</button>
+    </section>
+    <section class="step" id="step2">
+      <span class="icon">🌷</span><div class="eyebrow">Our story</div>
+      <h1>some memories stay special.</h1>
+      <p>when i think about us sayang , i remember the little things: our conversations, the laughter, and the moments that made ordinary days feel meaningful.</p>
+      <p>whatever happens next, im grateful for those memories.</p>
+      <button onclick="showStep(3)">keep reading ♡</button>
+    </section>
+    <section class="step" id="step3">
+      <span class="icon">🩷</span><div class="eyebrow">From my heart</div>
+      <h1>im sorry sayang.</h1>
+      <p>i have spent time thinking about us these 2 days  and about the ways i could have done better. im so sorry for the moments when my actions hurt you or made things harder.</p>
+      <p>i don't expect a message or a website to fix everything. what matters is listening, learning, and showing change through actions, not just promises.</p>
+      <p>you deserve to feel heard and respected, whatever you decide.</p>
+      <button onclick="showStep(4)">One last thing ♡</button>
+    </section>
+    <section class="step" id="step4">
+      <span class="icon">💕</span><div class="eyebrow">A question</div>
+      <h1>Could we try again?</h1>
+      <p>i would  like the chance to build something better together, slowly and honestly, if that's something you want too.</p>
+      <p>your feelings and your choice matter.</p>
+      <button onclick="showStep(5)">Yes, let's talk ❤️</button>
+      <button class="secondary" onclick="showStep(6)">Yes PLEASE </button>
+    </section>
+    <section class="step" id="step5">
+      <span class="icon">💗</span><h1>thank you for being open to talking.</h1>
+      <p>this means a lot sayang i cant live without you sayang. let's take things one step at a time, listen to each other, and be honest about what we both need.</p>
+      <p class="small">you can message me whenever you're comfortable.</p>
+      <button class="secondary" onclick="showStep(1)">Read again</button>
+    </section>
+    <section class="step" id="step6">
+      <span class="icon">🤍</span><h1>I understand.</h1>
+      <p>this means a lot sayang i cant live without you sayang. let's take things one step at a time, listen to each other, and be honest about what we both need</p>
+      <p class="small">you can message me whenever you're comfortable.</p>
+      <button class="secondary" onclick="showStep(1)">Read again</button>
+    </section>
+  </main>
+  <script>
+    function showStep(number) {
+      document.querySelectorAll('.step').forEach(section => section.classList.remove('active'));
+      document.getElementById('step' + number).classList.add('active');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+    const hearts = document.getElementById('hearts');
+    for(let i=0;i<16;i++) {
+      const heart=document.createElement('span');
+      heart.className='heart';heart.textContent=i%3===0?'♡':'♥';
+      heart.style.left=(i*17+9)%100+'%';
+      heart.style.fontSize=(12+i%5*5)+'px';
+      heart.style.animationDuration=(9+i%7*2)+'s';
+      heart.style.animationDelay=(-i*1.7)+'s';
+      hearts.appendChild(heart);
+    }
+  </script>
+</body>
+</html>
